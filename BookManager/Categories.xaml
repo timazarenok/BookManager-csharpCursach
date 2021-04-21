@@ -1,0 +1,16 @@
+﻿<Window x:Class="BookManager.Categories"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookManager"
+        mc:Ignorable="d"
+        Title="Categories" Height="450" Width="800">
+    <Grid>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,50,450,0">Добавьте категорию товаров</Label>
+        <TextBox x:Name="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,0,550,150"/>
+        <Button x:Name="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,550,20" Width="120" Height="25" Click="Add_Click">Добавить</Button>
+        <Button x:Name="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,250,20" Width="120" Height="25" Click="Delete_Click">Удалить</Button>
+        <DataGrid x:Name="Table" AutoGenerateColumns="True" Width="300" Margin="250, 50, 0, 50"/>
+    </Grid>
+</Window>

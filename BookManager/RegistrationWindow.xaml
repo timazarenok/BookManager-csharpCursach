@@ -1,0 +1,24 @@
+﻿<Window x:Class="BookManager.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookManager"
+        mc:Ignorable="d"
+        Title="RegistrationWindow" Height="450" Width="800">
+    <Grid>
+        <Label Height="30" Width="140" Content="Регистрация" FontSize="17" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,33,177.6,263.8"/>
+        <TextBlock Height="24" Width="140" Text="Введите логин" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,37,177.6,209.4"/>
+        <TextBox x:Name="LoginBox" TextWrapping="Wrap" Height="20" Width="140" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="175,59,178.6,191.4"/>
+        <TextBlock Text="Введите пароль" Grid.Row="0" Height="26" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,81,177.6,163.4"/>
+        <PasswordBox x:Name="Password" Height="20" Width="140" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,104,177.6,146.4"/>
+        <TextBlock Text="Повторите пароль" Height="26" Width="140" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,121,177.6,123.4"/>
+        <PasswordBox x:Name="RepeatPassword" Grid.Row="0" Height="20" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="176,144,177.6,106.4"/>
+        <Button Content="Отправить" HorizontalAlignment="Left" Margin="345,265,0,0" VerticalAlignment="Top" Width="120" Height="25" Click="Button_Click" RenderTransformOrigin="0.293,0.586">
+
+        </Button>
+        <Button Content="Войти" HorizontalAlignment="Left" Margin="345,315,0,0" VerticalAlignment="Top" Width="120" Height="25" Click="Button_Click_1" RenderTransformOrigin="0.293,0.586">
+
+        </Button>
+    </Grid>
+</Window>

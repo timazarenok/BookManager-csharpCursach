@@ -1,0 +1,18 @@
+﻿<Window x:Class="BookManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookManager"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Button x:Name="BooksCategories" Width="120" Height="25" Click="BooksCategories_Click">Категории Книг</Button>
+            <Button x:Name="ProductsCategories" Width="120" Height="25" Click="ProductsCategories_Click">Категории Товаров</Button>
+            <Button x:Name="Books" Width="120" Height="25" Click="Books_Click">Книги</Button>
+            <Button x:Name="Orders" Width="120" Height="25">Заказы</Button>
+            <Button x:Name="Products" Width="120" Height="25" Click="Products_Click">Продукты</Button>
+        </StackPanel>
+    </Grid>
+</Window>
