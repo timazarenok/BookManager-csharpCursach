@@ -48,5 +48,24 @@ namespace BookManager
             Products window = new Products();
             window.Show();
         }
+
+        private void Authors_Click(object sender, RoutedEventArgs e)
+        {
+            Authors window = new Authors();
+            window.Show();
+        }
+
+        private void Orders_Click(object sender, RoutedEventArgs e)
+        {
+            Orders window = new Orders();
+            window.Show();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            Close();
+        }
     }
 }

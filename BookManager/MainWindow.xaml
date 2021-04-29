@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <Button x:Name="BooksCategories" Width="120" Height="25" Click="BooksCategories_Click">Категории Книг</Button>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="BooksCategories" Width="120" Margin="10,50,0,10" Height="25" Click="BooksCategories_Click">Категории Книг</Button>
             <Button x:Name="ProductsCategories" Width="120" Height="25" Click="ProductsCategories_Click">Категории Товаров</Button>
-            <Button x:Name="Books" Width="120" Height="25" Click="Books_Click">Книги</Button>
-            <Button x:Name="Orders" Width="120" Height="25">Заказы</Button>
-            <Button x:Name="Products" Width="120" Height="25" Click="Products_Click">Продукты</Button>
+            <Button x:Name="Books" Width="120" Height="25" Margin="10,50,0,10" Click="Books_Click">Книги</Button>
+            <Button x:Name="Orders" Width="120" Height="25" Click="Orders_Click">Заказы</Button>
+            <Button x:Name="Products" Width="120" Height="25" Margin="10,50,0,10" Click="Products_Click">Продукты</Button>
+            <Button x:Name="Authors" Width="120" Height="25" Click="Authors_Click">Авторы</Button>
         </StackPanel>
+        <Button x:Name="Exit" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Height="25" Margin="20,0,0,20" Click="Exit_Click">Выход</Button>
     </Grid>
 </Window>

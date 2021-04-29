@@ -40,8 +40,20 @@ namespace BookManager
         {
             return new Regex("[A-Za-z0-9]{8,20}").IsMatch(password);
         }
+        private bool RegexAdmin(string login, string password)
+        {
+            return new Regex("adminadmin").IsMatch(login+password);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (RegexAdmin(LoginBox.Text, Password.Password))
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                Close();
+                MessageBox.Show("Админ авторизовался");
+                return;
+            }
             if (RegexLogin(LoginBox.Text))
             {
                 if (RegexPassword(Password.Password))
@@ -49,8 +61,9 @@ namespace BookManager
                     DataTable find = DB.Select($"select * from [Users] where login='{LoginBox.Text}' and password='{Password.Password}'");
                     if (find.Rows.Count > 0)
                     {
-                        MainWindow mw = new MainWindow();
-                        mw.Show();
+                        DB.GetUserId(LoginBox.Text, Password.Password);
+                        UserWindow uw = new UserWindow();
+                        uw.Show();
                         Close();
                         MessageBox.Show("Пользователь авторизовался");
                     }

@@ -12,6 +12,15 @@ namespace BookManager
     public class DB
     {
         public const string connectionString = @"Server=DANIKDRANIK\TEW_SQLEXPRESS;Database=BookManager;Trusted_Connection=True;";
+        public static int UserID = 0;
+        public static void GetUserId(string login, string password)
+        {
+            DataTable find = Select($"select * from [Users] where login='{login}' and password='{password}'");
+            if (find.Rows.Count > 0)
+            {
+                UserID = Convert.ToInt32(find.Rows[0]["id"]);
+            }
+        }
         public static bool Command(string expression)
         {
             SqlConnection connection = new SqlConnection(connectionString);

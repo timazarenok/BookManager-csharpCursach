@@ -5,19 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookManager"
         mc:Ignorable="d"
-        Title="Products" Height="450" Width="800">
+        Title="Products" Height="850" Width="800">
     <Grid>
-        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,450,0">Добавьте книгу</Label>
-        <TextBlock Text="Название" Margin="30,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Категория" Margin="220,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Цена" Margin="30,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Описание" Margin="30,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBox x:Name="Price" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,140,600,220" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="Description" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" TextWrapping="Wrap" Height="70" Margin="0,220,490,130"/>
-        <ComboBox x:Name="Categories" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" Margin="0,0,250,220"/>
-        <TextBox x:Name="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,0,600,220"/>
-        <Button x:Name="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,220,550,0" Width="120" Height="25" Click="Add_Click">Добавить</Button>
-        <Button x:Name="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,220,250,0" Width="120" Height="25" Click="Delete_Click">Удалить</Button>
-        <DataGrid x:Name="Table" AutoGenerateColumns="True" Width="400" Margin="350, 50, 0, 50"/>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">Добавьте книгу</Label>
+        <TextBlock Text="Название" Margin="250,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Категория" Margin="440,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Количество" Margin="440,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="Amount" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="220,140,0,620" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBlock Text="Цена" Margin="250,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Описание" Margin="250,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="Price" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,140,150,620" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="Description" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" TextWrapping="Wrap" Height="70" Margin="20,0,0,300"/>
+        <ComboBox x:Name="Categories" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" Margin="200,0,0,620"/>
+        <TextBox x:Name="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,0,150,620"/>
+        <Button x:Name="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,200,100" Width="120" Height="25" Click="Add_Click">Добавить</Button>
+        <Button x:Name="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200,0,0,100" Width="120" Height="25" Click="Delete_Click">Удалить</Button>
+        <DataGrid x:Name="Table" AutoGenerateColumns="False" Width="700" Margin="0,400,0,50">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="150" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Категория" Width="100" Binding="{Binding Path=Category}"/>
+                <DataGridTextColumn Header="Описание" Width="300" Binding="{Binding Path=Description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Path=Amount}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

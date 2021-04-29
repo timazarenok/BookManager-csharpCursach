@@ -1,0 +1,71 @@
+﻿<Window x:Class="BookManager.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookManager"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="550" Width="900">
+    <Grid>
+        <Label Content="Ассортимент" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,250,0"/>
+        <Label Content="Заказ" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,100,0"/>
+        <ListBox x:Name="AllProducts" Width="300" MouseDoubleClick="AllProducts_MouseDoubleClick" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="280" Background="#fdffb6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Margin="10,0,0,10"/>
+                        <TextBlock Text="{Binding Category}" FontSize="12" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+                        <TextBlock FontWeight="Bold" Grid.Column="1" Grid.Row="2" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Top" Text="Цена:" Margin="0,50,5,0"/>
+                        <TextBlock Text="{Binding Description}" FontSize="8" Width="180" TextWrapping="Wrap" Grid.Row="2" Grid.ColumnSpan="1" Margin="0,0,0,0"/>
+                        <TextBlock Text="{Binding Price}" FontWeight="Bold" FontSize="13" Width="50" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,0,20"/>
+                        <Button x:Name="Add" Grid.Row="3" Margin="0,0,50,5" Grid.Column="0" Width="100" Height="25" Click="Add_Click">Купить</Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="AllBooks" MouseDoubleClick="AllBooks_MouseDoubleClick" Width="300" Margin="330,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="280" Background="#fdffb6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="10,0,0,10"/>
+                        <TextBlock Text="{Binding Category}" FontSize="12" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+                        <TextBlock FontWeight="Bold" Grid.Column="1" Grid.Row="2" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Top" Text="Цена:" Margin="0,50,5,0"/>
+                        <TextBlock Text="{Binding Description}" FontSize="8" Width="180" TextWrapping="Wrap" Grid.Row="2" Grid.ColumnSpan="1" Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding Price}" FontWeight="Bold" FontSize="13" Width="50" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,0,20"/>
+                        <Button x:Name="AddBook" Grid.Row="3" Grid.Column="0" Width="100" Height="25" Click="AddBook_Click">Купить</Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <DataGrid x:Name="Cart" AutoGenerateColumns="False" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="300" Margin="0,0,20,50">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="30" Binding="{Binding Path=ID}"/>
+                <DataGridTextColumn Header="Название" Width="100" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Цена" Width="80" Binding="{Binding Path=Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,100">Для удаление (Введите ID товара)</TextBlock>
+        <TextBox x:Name="IDDelete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="25" Margin="0,0,120,65"/>
+        <Button x:Name="Delete" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,120,20" Width="100" Height="25" RenderTransformOrigin="0.5,0.508" Click="Delete_Click">Удалить</Button>
+    </Grid>
+</Window>

@@ -35,7 +35,7 @@ namespace BookManager
         }
         public void SetProducts()
         {
-            DataTable dt = DB.Select("select Products.[name], Categories.[name] as category , [description], price from Products JOIN Categories on Categories.id = id_category");
+            DataTable dt = DB.Select("select Products.[name], Categories.[name] as category, [description], price, amount from Products JOIN Categories on Categories.id = id_category");
             List<Product> books = new List<Product>();
             foreach (DataRow dr in dt.Rows)
             {
@@ -44,7 +44,8 @@ namespace BookManager
                     Name = dr["name"].ToString(),
                     Category = dr["category"].ToString(),
                     Description = dr["description"].ToString(),
-                    Price = dr["price"].ToString()
+                    Price = dr["price"].ToString(),
+                    Amount = dr["amount"].ToString()
                 });
             }
             Table.ItemsSource = books;
@@ -62,7 +63,7 @@ namespace BookManager
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             int category_id = DB.GetId($"select id from Categories where [name] = '{Categories.SelectedItem}'");
-            if (DB.Command($"insert into Products values({category_id}, '{Name.Text}', '{Description.Text}', {Price.Text})"))
+            if (DB.Command($"insert into Products values({category_id}, '{Name.Text}', '{Description.Text}', {Price.Text}, {Amount.Text})"))
             {
                 SetProducts();
             }

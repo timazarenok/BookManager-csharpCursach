@@ -54,3 +54,9 @@ C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\BookManager.csproj
 C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\BookManager.csproj.CoreCompileInputs.cache
 C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\BookManager.exe
 C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\BookManager.pdb
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\Authors.g.cs
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\Authors.baml
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\Orders.g.cs
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\UserWindow.g.cs
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\Orders.baml
+C:\Users\Даник\Desktop\BookManager\BookManager\obj\Debug\UserWindow.baml

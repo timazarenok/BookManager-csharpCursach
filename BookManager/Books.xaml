@@ -5,21 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookManager"
         mc:Ignorable="d"
-        Title="Books" Height="450" Width="800">
+        Title="Books" Height="850" Width="800">
     <Grid>
-        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,450,0">Добавьте книгу</Label>
-        <TextBlock Text="Название" Margin="30,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Категория" Margin="220,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Цена" Margin="220,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Автор" Margin="30,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock Text="Описание" Margin="30,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBox x:Name="Price" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,140,220,220" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="Description" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" TextWrapping="Wrap" Height="70" Margin="0,220,490,130"/>
-        <TextBox x:Name="Author" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,140,600,220"/>
-        <ComboBox x:Name="Categories" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="25" Margin="0,0,250,220"/>
-        <TextBox x:Name="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,0,600,220"/>
-        <Button x:Name="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,220,550,0" Width="120" Height="25" Click="Add_Click">Добавить</Button>
-        <Button x:Name="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,220,250,0" Width="120" Height="25" Click="Delete_Click">Удалить</Button>
-        <DataGrid x:Name="Table" AutoGenerateColumns="True" Width="400" Margin="350, 50, 0, 50"/>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">Добавьте книгу</Label>
+        <TextBlock Text="Название" Margin="180,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Категория" Margin="370,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Цена" Margin="370,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Автор" Margin="180,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Описание (300)" Margin="180,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="Price" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="100,140,0,620" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="Description" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" TextWrapping="Wrap" Height="70" Margin="0,120,100,410"/>
+        <ComboBox x:Name="Author" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,140,300,620"/>
+        <ComboBox x:Name="Categories" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25" Margin="100,0,0,620"/>
+        <TextBlock Text="Количество" Margin="560,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox x:Name="Amount" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="450,140,0,620" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="0,0,300,620"/>
+        <Button x:Name="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,250,100" Width="120" Height="25" Click="Add_Click">Добавить</Button>
+        <Button x:Name="Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="100,0,0,100" Width="120" Height="25" Click="Delete_Click">Удалить</Button>
+        <DataGrid x:Name="Table" AutoGenerateColumns="False" Width="700" Margin="0, 400, 0, 50">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="100" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Категория" Width="100" Binding="{Binding Path=Category}" />
+                <DataGridTextColumn Header="Автор" Width="100" Binding="{Binding Path=Author}" />
+                <DataGridTextColumn Header="Описание" FontSize="12" Width="270" Binding="{Binding Path=Description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="50" />
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Path=Amount}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

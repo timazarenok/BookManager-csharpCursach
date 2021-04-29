@@ -7,7 +7,7 @@
         <Style TargetType="Button">
             <Setter Property="Background" Value="#e5e5e5"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Margin" Value="10,0,0,10"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="FontWeight" Value="Bold"/>

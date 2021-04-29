@@ -53,8 +53,8 @@ namespace BookManager
                             {
                                 DB.Command($"insert into [Users] values('{LoginBox.Text}', '{Password.Password}')");
                                 MessageBox.Show("Успешно создан");
-                                MainWindow mw = new MainWindow();
-                                mw.Show();
+                                UserWindow uw = new UserWindow();
+                                uw.Show();
                                 Close();
                             }
                             catch (Exception error)

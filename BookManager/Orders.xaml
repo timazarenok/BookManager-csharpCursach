@@ -1,0 +1,40 @@
+﻿<Window x:Class="BookManager.Orders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookManager"
+        mc:Ignorable="d"
+        Title="Orders" Height="450" Width="800">
+    <Grid>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top">Заказы</Label>
+        <ListBox x:Name="OrdersAll" Margin="10,50,10,10" MouseDoubleClick="Orders_MouseDoubleClick" VerticalAlignment="Center" HorizontalAlignment="Left" Height="300" Width="300">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Date}" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="Итог: " Grid.Column="1" Margin="10,0,0,10"/>
+                        <TextBlock Text="{Binding Result}" FontWeight="Bold" Margin="0,0,0,10"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="OrderProducts" Margin="320,50,10,10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="300" Width="450">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

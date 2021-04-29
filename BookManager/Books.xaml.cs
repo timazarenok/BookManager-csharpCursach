@@ -27,6 +27,7 @@ namespace BookManager
             InitializeComponent();
             SetCategories();
             SetBooks();
+            SetAuthors();
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -35,12 +36,14 @@ namespace BookManager
         }
         public void SetBooks()
         {
-            DataTable dt = DB.Select("select Books.[name], BookCategories.[name] as category, author, [description], price from Books JOIN BookCategories on BookCategories.id = id_category");
+            DataTable dt = DB.Select("select Books.[name], BookCategories.[name] as category, Authors.full_name as author, [description], price, amount from Books JOIN BookCategories on BookCategories.id = id_category join Authors on Authors.id = id_author");
             List<Book> books = new List<Book>();
             foreach (DataRow dr in dt.Rows)
             {
                 books.Add(new Book() { Name = dr["name"].ToString(), Category = dr["category"].ToString(),
-                    Author = dr["author"].ToString(), Description = dr["description"].ToString(), Price = dr["price"].ToString() });
+                    Author = dr["author"].ToString(), Description = dr["description"].ToString(), Price = dr["price"].ToString(),
+                    Amount = dr["amount"].ToString()
+                });
             }
             Table.ItemsSource = books;
         }
@@ -54,10 +57,21 @@ namespace BookManager
             }
             Categories.ItemsSource = categories;
         }
+        public void SetAuthors()
+        {
+            DataTable dt = DB.Select("select * from Authors");
+            List<string> authors = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                authors.Add(dr["full_name"].ToString());
+            }
+            Author.ItemsSource = authors;
+        }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             int category_id = DB.GetId($"select id from BookCategories where [name] = '{Categories.SelectedItem}'");
-            if (DB.Command($"insert into Books values({category_id}, '{Name.Text}', '{Author.Text}', '{Description.Text}', {Price.Text})"))
+            int author_id = DB.GetId($"select id from Authors where [full_name]='{Author.SelectedItem}'");
+            if (DB.Command($"insert into Books values({category_id}, {author_id}, '{Name.Text}', '{Description.Text}', {Price.Text}, {Amount.Text})"))
             {
                 SetBooks();
             }
