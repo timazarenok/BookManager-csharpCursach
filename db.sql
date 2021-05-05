@@ -65,6 +65,7 @@ number int Identity(1000000, 1)
 
 insert into Users values ('tima2002', 'tima2002')
 insert into Orders values(1, (select convert(varchar(10),(select getdate()), 120)), 0)
-insert into OrdersProducts values (1,1,1)
 select * from OrdersProducts
+select * from Orders
+update Orders set result+=4,0 where id = 1
 SELECT number, name, price FROM OrdersProducts join Products on Products.id = id_product WHERE id_order = 3

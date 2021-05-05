@@ -24,12 +24,10 @@ namespace BookManager
         public bool first = true;
         public int id_order = -1;
         public int id_pr_or = DB.GetId("select top 1 * from OrdersProducts order by id desc");
-        public int id_bk_or = DB.GetId("select top 1 * from OrdersBooks order by id desc");
         public UserWindow()
         {
             InitializeComponent();
             SetAllProducts();
-            SetAllBooks();
             UpdateIDs();
         }
         private void SetAllProducts()
@@ -48,24 +46,6 @@ namespace BookManager
             }
             AllProducts.ItemsSource = products;
         }
-        private void SetAllBooks()
-        {
-            DataTable dt = DB.Select("select Books.id, Books.[name], [description], BookCategories.[name] as category, price from Books join BookCategories on BookCategories.id = Books.id_category");
-            List<Book> products = new List<Book>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                products.Add(new Book
-                {
-                    ID = dr["id"].ToString(),
-                    Name = dr["name"].ToString(),
-                    Category = dr["category"].ToString(),
-                    Description = dr["description"].ToString(),
-                    Price = dr["price"].ToString()
-                });
-            }
-            AllBooks.ItemsSource = products;
-        }
-
         private void SetAllInOrder()
         {
             DataTable dt = DB.Select($"SELECT number, name, price FROM OrdersProducts join Products on Products.id = id_product WHERE id_order = {id_order} ");
@@ -101,6 +81,7 @@ namespace BookManager
             {
                 SetAllInOrder();
                 UpdateIDs();
+                DB.Command($"update Orders set result+={ChangeComa(selected.Price)} where id = {id_order}");
             }
             else
             {
@@ -110,54 +91,30 @@ namespace BookManager
         private void UpdateIDs()
         {
             id_pr_or = DB.GetId("select top 1 * from OrdersProducts order by id desc");
-            id_bk_or = DB.GetId("select top 1 * from OrdersBooks order by id desc");
-            MessageBox.Show(id_pr_or + "");
         }
-
-        private void AddBook_Click(object sender, RoutedEventArgs e)
-        {
-            if (first)
-            {
-                if (DB.Command($"insert into Orders values({DB.UserID}, (select convert(varchar(10),(select getdate()), 120)), 0)"))
-                {
-                    first = false;
-                    id_order = DB.GetId($"select top 1 * from Orders where id_user = {DB.UserID} order by id desc");
-                }
-                else
-                {
-                    MessageBox.Show("У нас неполадки в системе попробуйте позже");
-                    return;
-                }
-            }
-            Book selected = (Book)AllBooks.SelectedItem;
-            if (DB.Command($"insert into OrdersBooks values({id_bk_or + 1}, {id_order}, {selected.ID})"))
-            {
-                SetAllInOrder();
-                UpdateIDs();
-            }
-            else
-            {
-                MessageBox.Show("Что-то пошло не так попробуйте позже");
-            }
-        }
-
-        private void AllBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AllBooks.SelectedItem = sender;
-        }
-
         private void AllProducts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             AllProducts.SelectedItem = sender;
         }
+        private string ChangeComa(string text) => text.Replace(',', '.');
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             string id = IDDelete.Text;
+            List<string> dt = DB.GetDataOneAttribute($"select id_product from OrdersProducts where number={id}", "id_product");
+            List<string> product = DB.GetDataOneAttribute($"select price from Products where id = {dt[0]}", "price");
             if (DB.Command($"delete from OrdersProducts where number = {id}"))
             {
                 SetAllInOrder();
+                DB.Command($"update Orders set result-={ChangeComa(product[0])} where id = {id_order}");
             }
+        }
+
+        private void BookShopButton_Click(object sender, RoutedEventArgs e)
+        {
+            BookShop shop = new BookShop();
+            shop.Show();
+            Close();
         }
     }
 }
