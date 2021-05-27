@@ -16,25 +16,23 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Date}" FontWeight="Bold" Margin="0,0,0,10"/>
-                        <TextBlock Text="Итог: " Grid.Column="1" Margin="10,0,0,10"/>
-                        <TextBlock Text="{Binding Result}" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Date}" Grid.Row="1" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="Итог: " Grid.Column="0" Margin="10,0,0,10"/>
+                        <TextBlock Text="{Binding Result}" Grid.Column="1" FontWeight="Bold" Margin="0,0,0,10"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="OrderProducts" Margin="320,50,10,10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="300" Width="450">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <DataGrid x:Name="OrderProducts" AutoGenerateColumns="False" Margin="320,50,10,10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="300" Width="450">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Excel" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,500,0" Click="Excel_Click">Экспорт в EXCEL</Button>
     </Grid>
 </Window>

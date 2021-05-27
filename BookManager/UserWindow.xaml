@@ -9,7 +9,8 @@
     <Grid>
         <Label Content="Ассортимент" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,250,0"/>
         <Label Content="Заказ" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,100,0"/>
-        <ListBox x:Name="AllProducts" Width="400" MouseDoubleClick="AllProducts_MouseDoubleClick" Margin="100,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="350">
+        <TextBox x:Name="Search" TextChanged="Search_TextChanged" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,70,450,0" />
+        <ListBox x:Name="AllProducts" Width="400" MouseDoubleClick="AllProducts_MouseDoubleClick" Margin="100,50,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="350">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="280" Background="#fdffb6">
@@ -44,5 +45,7 @@
         <TextBox x:Name="IDDelete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="25" Margin="0,0,120,65"/>
         <Button x:Name="Delete" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,120,20" Width="100" Height="25" RenderTransformOrigin="0.5,0.508" Click="Delete_Click">Удалить</Button>
         <Button x:Name="BookShopButton" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="200,0,0,20" Click="BookShopButton_Click">Книги</Button>
+        <Button x:Name="CloseOrder" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="400,0,0,20" Click="CloseOrder_Click">Закрыть заказ</Button>
+        <Button x:Name="Exit" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,20" Click="Exit_Click">Выход</Button>
     </Grid>
 </Window>

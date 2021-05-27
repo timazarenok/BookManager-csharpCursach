@@ -24,15 +24,21 @@ namespace BookManager
         public bool first = true;
         public int id_order = -1;
         public int id_bk_or = DB.GetId("select top 1 * from OrdersBooks order by id desc");
+        public List<Book> products = new List<Book>();
         public BookShop()
         {
             InitializeComponent();
             SetAllBooks();
         }
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = Search.Text;
+            AllBooks.ItemsSource = products.FindAll(item => item.Name.Contains(text));
+        }
         private void SetAllBooks()
         {
             DataTable dt = DB.Select("select Books.id, Books.[name], [description], BookCategories.[name] as category, price from Books join BookCategories on BookCategories.id = Books.id_category");
-            List<Book> products = new List<Book>();
+            products = new List<Book>();
             foreach (DataRow dr in dt.Rows)
             {
                 products.Add(new Book
@@ -107,6 +113,20 @@ namespace BookManager
                 SetAllInOrder();
                 DB.Command($"update Orders set result-={ChangeComa(book[0])} where id = {id_order}");
             }
+        }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            Close();
+        }
+
+        private void CloseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Ваш заказ отправлен на сервер");
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            Close();
         }
     }
 }

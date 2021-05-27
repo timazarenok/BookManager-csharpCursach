@@ -67,5 +67,11 @@ namespace BookManager
             login.Show();
             Close();
         }
+
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow window = new InfoWindow();
+            window.Show();
+        }
     }
 }

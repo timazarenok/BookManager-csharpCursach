@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace BookManager
 {
@@ -37,23 +39,49 @@ namespace BookManager
         }
         private void SetOrderProducts(Order order)
         {
-            DataTable dt = DB.Select($"select [date], Books.[name], Books.[price], OrdersBooks.amount from Orders join OrdersBooks on OrdersBooks.id_order = Orders.id join Books on Books.id = id_book where Order.id = {order.ID}");
             List<OrderProduct> orderProducts = new List<OrderProduct>();
-            foreach (DataRow dr in dt.Rows)
+            DataTable dt = DB.Select($"select [date], Books.[name], Books.[price] from Orders join OrdersBooks on OrdersBooks.id_order = Orders.id join Books on Books.id = id_book where Orders.id = {order.ID}");
+            DataTable dt2 = DB.Select($"select Products.[name], Products.[price] from Orders join OrdersProducts on OrdersProducts.id_order = Orders.id join Products on Products.id = id_product where Orders.id = {order.ID}");
+            if (dt.Rows.Count == 0)
             {
-                orderProducts.Add(new OrderProduct { Name = dr["name"].ToString(), Price = dr["price"].ToString()});
+                foreach (DataRow dr in dt2.Rows)
+                {
+                    orderProducts.Add(new OrderProduct { Name = dr["name"].ToString(), Price = dr["price"].ToString() });
+                }
             }
-            DataTable dt2 = DB.Select("select [date], Products.[name], Products.[price], OrdersProducts.amount from Orders join OrdersProducts on OrdersProducts.id_order = Orders.id join Products on Products.id = id_product");
-            foreach (DataRow dr in dt2.Rows)
+            else
             {
-                orderProducts.Add(new OrderProduct { Name = dr["name"].ToString(), Price = dr["price"].ToString()});
-            }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    orderProducts.Add(new OrderProduct { Name = dr["name"].ToString(), Price = dr["price"].ToString() });
+                }
+            }  
             OrderProducts.ItemsSource = orderProducts;
         }
         private void Orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Order order = (Order)sender;
+            OrdersAll.SelectedItem = sender;
+            Order order = (Order)OrdersAll.SelectedItem;
             SetOrderProducts(order);
+        }
+
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application ExcelApp = new Excel.Application();
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            ExcelApp.Columns.ColumnWidth = 15;
+
+            ExcelApp.Cells[1, 1] = "Дата";
+            ExcelApp.Cells[1, 2] = "Результат";
+
+            var list = OrdersAll.Items.OfType<Order>().ToList();
+
+            for (int j = 0; j < list.Count; j++)
+            {
+                ExcelApp.Cells[j + 2, 1] = list[j].Date;
+                ExcelApp.Cells[j + 2, 2] = list[j].Result;
+            }
+            ExcelApp.Visible = true;
         }
     }
 }

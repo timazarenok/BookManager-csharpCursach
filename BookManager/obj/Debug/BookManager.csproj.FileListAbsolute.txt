@@ -132,3 +132,41 @@ C:\Users\Lenovo\OneDrive\Рабочий стол\Тима\BookManager-csharpCurs
 C:\Users\Lenovo\OneDrive\Рабочий стол\Тима\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\OneDrive\Рабочий стол\Тима\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.exe
 C:\Users\Lenovo\OneDrive\Рабочий стол\Тима\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.pdb
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\bin\Debug\BookManager.exe.config
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\bin\Debug\BookManager.exe
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\bin\Debug\BookManager.pdb
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.csproj.AssemblyReference.cache
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Authors.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookCategories.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Books.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookShop.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Categories.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\LoginWindow.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\MainWindow.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Orders.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Products.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\RegistrationWindow.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\UserWindow.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\App.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager_MarkupCompile.cache
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager_MarkupCompile.lref
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\App.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Authors.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookCategories.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Books.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookShop.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Categories.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\LoginWindow.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\MainWindow.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Orders.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\Products.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\RegistrationWindow.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\UserWindow.baml
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.g.resources
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.Properties.Resources.resources
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.csproj.GenerateResource.cache
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.csproj.CoreCompileInputs.cache
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.exe
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\BookManager.pdb
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\InfoWindow.g.cs
+C:\Users\timog\OneDrive\Desktop\BookManager-csharpCursach\BookManager\obj\Debug\InfoWindow.baml
