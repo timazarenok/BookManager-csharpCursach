@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BookManager
 {
@@ -75,6 +76,31 @@ namespace BookManager
             {
                 SetProducts();
             }
+        }
+
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application ExcelApp = new Excel.Application();
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            ExcelApp.Columns.ColumnWidth = 15;
+
+            ExcelApp.Cells[1, 1] = "Название";
+            ExcelApp.Cells[1, 2] = "Категория";
+            ExcelApp.Cells[1, 3] = "Описание";
+            ExcelApp.Cells[1, 4] = "Цена";
+            ExcelApp.Cells[1, 5] = "Кол-во";
+
+            var list = Table.Items.OfType<Product>().ToList();
+
+            for (int j = 0; j < list.Count; j++)
+            {
+                ExcelApp.Cells[j + 2, 1] = list[j].Name;
+                ExcelApp.Cells[j + 2, 2] = list[j].Category;
+                ExcelApp.Cells[j + 2, 3] = list[j].Description;
+                ExcelApp.Cells[j + 2, 4] = list[j].Price;
+                ExcelApp.Cells[j + 2, 5] = list[j].Amount;
+            }
+            ExcelApp.Visible = true;
         }
     }
 }

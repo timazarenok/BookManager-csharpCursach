@@ -29,15 +29,24 @@ namespace BookManager
         {
             InitializeComponent();
             SetAllBooks();
+            SetSortParams();
+        }
+        private void SetSortParams()
+        {
+            List<string> sortparams = new List<string>();
+            sortparams.Add("Мин");
+            sortparams.Add("Макс");
+            sortparams.Add(" ");
+            Sort.ItemsSource = sortparams;
         }
         private void Search_TextChanged(object sender, TextChangedEventArgs e)
         {
             string text = Search.Text;
-            AllBooks.ItemsSource = products.FindAll(item => item.Name.Contains(text));
+            AllBooks.ItemsSource = products.Where(item => item.Name.Contains(text) && item.Author.Contains(text)).ToList();
         }
         private void SetAllBooks()
         {
-            DataTable dt = DB.Select("select Books.id, Books.[name], [description], BookCategories.[name] as category, price from Books join BookCategories on BookCategories.id = Books.id_category");
+            DataTable dt = DB.Select("select Books.id, Books.[name], Authors.full_name, [description], BookCategories.[name] as category, price from Books join BookCategories on BookCategories.id = Books.id_category join Authors on Authors.id = Books.id_author");
             products = new List<Book>();
             foreach (DataRow dr in dt.Rows)
             {
@@ -45,6 +54,7 @@ namespace BookManager
                 {
                     ID = dr["id"].ToString(),
                     Name = dr["name"].ToString(),
+                    Author = dr["full_name"].ToString(),
                     Category = dr["category"].ToString(),
                     Description = dr["description"].ToString(),
                     Price = dr["price"].ToString()
@@ -127,6 +137,28 @@ namespace BookManager
             LoginWindow login = new LoginWindow();
             login.Show();
             Close();
+        }
+
+        private void Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (Sort.SelectedItem)
+            {
+                case "Макс":
+                {
+                        AllBooks.ItemsSource = products.OrderByDescending(el => Convert.ToDouble(el.Price)).ToList();
+                        break;
+                }
+                case "Мин":
+                {
+                        AllBooks.ItemsSource = products.OrderBy(el => Convert.ToDouble(el.Price)).ToList();
+                        break;
+                }
+                case " ":
+                {
+                        AllBooks.ItemsSource = products;
+                        break;
+                }
+            }
         }
     }
 }

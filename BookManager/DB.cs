@@ -11,7 +11,7 @@ namespace BookManager
 {
     public class DB
     {
-        public const string connectionString = @"Server=DESKTOP-VAR3OC6\SQLEXPRESS;Database=BookManager;Trusted_Connection=True;";
+        public const string connectionString = @"Server=DESKTOP-U0H9G3H\SQLEXPRESS;Database=BookManager;Trusted_Connection=True;";
         public static int UserID = 0;
         public static void GetUserId(string login, string password)
         {

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
 using BookManager.Models;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BookManager
 {
@@ -40,8 +41,12 @@ namespace BookManager
             List<Book> books = new List<Book>();
             foreach (DataRow dr in dt.Rows)
             {
-                books.Add(new Book() { Name = dr["name"].ToString(), Category = dr["category"].ToString(),
-                    Author = dr["author"].ToString(), Description = dr["description"].ToString(), Price = dr["price"].ToString(),
+                books.Add(new Book() { 
+                    Name = dr["name"].ToString(), 
+                    Category = dr["category"].ToString(),
+                    Author = dr["author"].ToString(), 
+                    Description = dr["description"].ToString(), 
+                    Price = dr["price"].ToString(),
                     Amount = dr["amount"].ToString()
                 });
             }
@@ -83,6 +88,33 @@ namespace BookManager
             {
                 SetBooks();
             }
+        }
+
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application ExcelApp = new Excel.Application();
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            ExcelApp.Columns.ColumnWidth = 15;
+
+            ExcelApp.Cells[1, 1] = "Название";
+            ExcelApp.Cells[1, 2] = "Категория";
+            ExcelApp.Cells[1, 3] = "Автор";
+            ExcelApp.Cells[1, 4] = "Описание";
+            ExcelApp.Cells[1, 5] = "Цена";
+            ExcelApp.Cells[1, 6] = "Кол-во";
+
+            var list = Table.Items.OfType<Book>().ToList();
+
+            for (int j = 0; j < list.Count; j++)
+            {
+                ExcelApp.Cells[j + 2, 1] = list[j].Name;
+                ExcelApp.Cells[j + 2, 2] = list[j].Category;
+                ExcelApp.Cells[j + 2, 3] = list[j].Author;
+                ExcelApp.Cells[j + 2, 4] = list[j].Description;
+                ExcelApp.Cells[j + 2, 5] = list[j].Price;
+                ExcelApp.Cells[j + 2, 6] = list[j].Amount;
+            }
+            ExcelApp.Visible = true;
         }
     }
 }

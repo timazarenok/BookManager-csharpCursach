@@ -64,5 +64,3 @@ number int Identity(1000000, 1)
 )
 
 insert into Users values ('tima2002', 'tima2002')
-select * from OrdersBooks
-select * from Orders

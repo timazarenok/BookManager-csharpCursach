@@ -30,6 +30,15 @@ namespace BookManager
             InitializeComponent();
             SetAllProducts();
             UpdateIDs();
+            SetSortParams();
+        }
+        private void SetSortParams()
+        {
+            List<string> sortparams = new List<string>();
+            sortparams.Add("Мин");
+            sortparams.Add("Макс");
+            sortparams.Add(" ");
+            Sort.ItemsSource = sortparams;
         }
         private void Search_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -113,6 +122,27 @@ namespace BookManager
             {
                 SetAllInOrder();
                 DB.Command($"update Orders set result-={ChangeComa(product[0])} where id = {id_order}");
+            }
+        }
+        private void Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (Sort.SelectedItem)
+            {
+                case "Макс":
+                    {
+                        AllProducts.ItemsSource = products.OrderByDescending(el => Convert.ToDouble(el.Price)).ToList();
+                        break;
+                    }
+                case "Мин":
+                    {
+                        AllProducts.ItemsSource = products.OrderBy(el => Convert.ToDouble(el.Price)).ToList();
+                        break;
+                    }
+                case " ":
+                    {
+                        AllProducts.ItemsSource = products;
+                        break;
+                    }
             }
         }
 

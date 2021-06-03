@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Products" Height="850" Width="800">
     <Grid>
+        <Button x:Name="Excel" Width="120" Height="20" Content="Отчет в Excel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Click="Excel_Click"/>
         <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">Добавьте книгу</Label>
         <TextBlock Text="Название" Margin="250,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBlock Text="Категория" Margin="440,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>

@@ -32,6 +32,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <ComboBox x:Name="Sort" Width="100" Height="25" Margin="0,0,120,350" SelectionChanged="Sort_SelectionChanged" />
         <DataGrid x:Name="Cart" AutoGenerateColumns="False" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="300" Margin="0,0,20,50">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="30" Binding="{Binding Path=ID}"/>
