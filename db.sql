@@ -62,5 +62,3 @@ id_order int references Orders(id),
 id_product int references Products(id),
 number int Identity(1000000, 1)
 )
-
-insert into Users values ('tima2002', 'tima2002')

@@ -23,6 +23,7 @@ namespace BookManager
     /// </summary>
     public partial class Orders : Window
     {
+        public List<Order> orders = new List<Order>();
         public Orders()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace BookManager
         private void SetOrders()
         {
             DataTable dt = DB.Select("select * from Orders");
-            List<Order> orders = new List<Order>();
+            orders = new List<Order>();
             foreach(DataRow dr in dt.Rows){
                 orders.Add(new Order { ID = dr["id"].ToString(), Date = dr["date"].ToString(), Result = dr["result"].ToString() });
             }
@@ -82,6 +83,17 @@ namespace BookManager
                 ExcelApp.Cells[j + 2, 2] = list[j].Result;
             }
             ExcelApp.Visible = true;
+        }
+
+        private void SearchByDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime date = (DateTime)SearchByDate.SelectedDate;
+            OrdersAll.ItemsSource = orders.FindAll(el => el.Date == date.ToString());
+        }
+
+        private void ShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            SetOrders();
         }
     }
 }

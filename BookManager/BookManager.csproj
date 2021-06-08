@@ -86,6 +86,9 @@
     <Compile Include="Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PereozenkaWindow.xaml.cs">
+      <DependentUpon>PereozenkaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Products.xaml.cs">
       <DependentUpon>Products.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Orders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PereozenkaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

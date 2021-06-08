@@ -8,6 +8,8 @@
         Title="Orders" Height="450" Width="800">
     <Grid>
         <Label HorizontalAlignment="Center" VerticalAlignment="Top">Заказы</Label>
+        <DatePicker x:Name="SearchByDate" Width="200" SelectedDateChanged="SearchByDate_SelectedDateChanged" Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="500,40,0,0" />
+        <Button x:Name="ShowAll" Width="120" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Content="Показать все" Click="ShowAll_Click"/>
         <ListBox x:Name="OrdersAll" Margin="10,50,10,10" MouseDoubleClick="Orders_MouseDoubleClick" VerticalAlignment="Center" HorizontalAlignment="Left" Height="300" Width="300">
             <ListBox.ItemTemplate>
                 <DataTemplate>

@@ -25,6 +25,7 @@ namespace BookManager
         public int id_order = -1;
         public int id_pr_or = DB.GetId("select top 1 * from OrdersProducts order by id desc");
         public List<Product> products = new List<Product>();
+        public List<OrderProduct> cart_items = new List<OrderProduct>();
         public UserWindow()
         {
             InitializeComponent();
@@ -63,44 +64,55 @@ namespace BookManager
         }
         private void SetAllInOrder()
         {
-            DataTable dt = DB.Select($"SELECT number, name, price FROM OrdersProducts join Products on Products.id = id_product WHERE id_order = {id_order} ");
-            List<OrderProduct> products = new List<OrderProduct>();
+            DataTable dt = DB.Select($"SELECT Products.id, number, name, price FROM OrdersProducts join Products on Products.id = id_product WHERE id_order = {id_order} ");
+            cart_items = new List<OrderProduct>();
             foreach(DataRow dr in dt.Rows)
             {
-                products.Add(new OrderProduct { 
+                cart_items.Add(new OrderProduct { 
                     ID = dr["number"].ToString(),
+                    BookId = dr["id"].ToString(),
                     Name = dr["name"].ToString(),
                     Price = dr["price"].ToString()
                 });
             }
-            Cart.ItemsSource = products;
+            Cart.ItemsSource = cart_items;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if(first)
+            Product selected = (Product)AllProducts.SelectedItem;
+            DataTable dt = DB.Select($"select amount from Products where id={selected.ID}");
+            int amount = Convert.ToInt32(dt.Rows[0]["amount"]);
+            if (amount - 1 > 0)
             {
-                if(DB.Command($"insert into Orders values({DB.UserID}, (SELECT getdate()), 0)"))
+                if (first)
                 {
-                    first = false;
-                    id_order = DB.GetId($"select top 1 * from Orders where id_user = {DB.UserID} order by id desc");
+                    if (DB.Command($"insert into Orders values({DB.UserID}, (SELECT getdate()), 0)"))
+                    {
+                        first = false;
+                        id_order = DB.GetId($"select top 1 * from Orders where id_user = {DB.UserID} order by id desc");
+                    }
+                    else
+                    {
+                        MessageBox.Show("У нас неполадки в системе попробуйте позже");
+                        return;
+                    }
+                }
+                if (DB.Command($"insert into OrdersProducts values({id_pr_or + 1}, {id_order}, {selected.ID})"))
+                {
+                    DB.Command($"Update Products set amount=amount-1 where id={selected.ID}");
+                    SetAllInOrder();
+                    UpdateIDs();
+                    DB.Command($"update Orders set result+={ChangeComa(selected.Price)} where id = {id_order}");
                 }
                 else
                 {
-                    MessageBox.Show("У нас неполадки в системе попробуйте позже");
-                    return;
+                    MessageBox.Show("Что-то пошло не так попробуйте позже");
                 }
-            }
-            Product selected = (Product)AllProducts.SelectedItem;
-            if (DB.Command($"insert into OrdersProducts values({id_pr_or + 1}, {id_order}, {selected.ID})"))
-            {
-                SetAllInOrder();
-                UpdateIDs();
-                DB.Command($"update Orders set result+={ChangeComa(selected.Price)} where id = {id_order}");
             }
             else
             {
-                MessageBox.Show("Что-то пошло не так попробуйте позже");
+                MessageBox.Show("Этого товара на складе больше не осталось \n Извините за неудобства");
             }
         }
         private void UpdateIDs()
@@ -155,6 +167,10 @@ namespace BookManager
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            foreach (OrderProduct product in cart_items)
+            {
+                DB.Command($"Update Products set amount=amount+1 where id = {product.BookId}");
+            }
             LoginWindow login = new LoginWindow();
             login.Show();
             Close();

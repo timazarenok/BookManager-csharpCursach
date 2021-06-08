@@ -15,6 +15,7 @@
             <Button x:Name="Products" Width="120" Height="25" Margin="10,50,0,10" Click="Products_Click">Продукты</Button>
             <Button x:Name="Authors" Width="120" Height="25" Click="Authors_Click">Авторы</Button>
         </StackPanel>
+        <Button x:Name="Pereozenka" Width="120" Height="25" Margin="120,90,0,0" Click="Pereozenka_Click">Переоценка</Button>
         <Button x:Name="Info" Width="120" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,20,0,0" Click="Info_Click">Справка</Button>
         <Button x:Name="Exit" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Height="25" Margin="20,0,0,20" Click="Exit_Click">Выход</Button>
     </Grid>

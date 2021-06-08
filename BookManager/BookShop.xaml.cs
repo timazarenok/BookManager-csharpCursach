@@ -25,6 +25,7 @@ namespace BookManager
         public int id_order = -1;
         public int id_bk_or = DB.GetId("select top 1 * from OrdersBooks order by id desc");
         public List<Book> products = new List<Book>();
+        public List<OrderProduct> cart_items = new List<OrderProduct>();
         public BookShop()
         {
             InitializeComponent();
@@ -64,30 +65,41 @@ namespace BookManager
         }
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
-            if (first)
+            Book selected = (Book)AllBooks.SelectedItem;
+            DataTable dt = DB.Select($"select amount from Books where id={selected.ID}");
+            int amount = Convert.ToInt32(dt.Rows[0]["amount"]);
+            if (amount-1 > 0)
             {
-                if (DB.Command($"insert into Orders values({DB.UserID}, (select convert(varchar(10),(select getdate()), 120)), 0)"))
+                if (first)
                 {
-                    first = false;
-                    id_order = DB.GetId($"select top 1 * from Orders where id_user = {DB.UserID} order by id desc");
+                    if (DB.Command($"insert into Orders values({DB.UserID}, (select convert(varchar(10),(select getdate()), 120)), 0)"))
+                    {
+                        first = false;
+                        id_order = DB.GetId($"select top 1 * from Orders where id_user = {DB.UserID} order by id desc");
+                    }
+                    else
+                    {
+                        MessageBox.Show("У нас неполадки в системе попробуйте позже");
+                        return;
+                    }
+                }
+                if (DB.Command($"insert into OrdersBooks values({id_bk_or + 1}, {id_order}, {selected.ID})"))
+                {
+                    DB.Command($"Update Books set amount=amount-1 where id={selected.ID}");
+                    SetAllInOrder();
+                    UpdateIDs();
+                    DB.Command($"update Orders set result+={ChangeComa(selected.Price)} where id = {id_order}");
                 }
                 else
                 {
-                    MessageBox.Show("У нас неполадки в системе попробуйте позже");
-                    return;
+                    MessageBox.Show("Что-то пошло не так попробуйте позже");
                 }
-            }
-            Book selected = (Book)AllBooks.SelectedItem;
-            if (DB.Command($"insert into OrdersBooks values({id_bk_or + 1}, {id_order}, {selected.ID})"))
-            {
-                SetAllInOrder();
-                UpdateIDs();
-                DB.Command($"update Orders set result+={ChangeComa(selected.Price)} where id = {id_order}");
             }
             else
             {
-                MessageBox.Show("Что-то пошло не так попробуйте позже");
+                MessageBox.Show("Этой книги на складе больше не осталось \n Извините за неудобства");
             }
+            
         }
         private string ChangeComa(string text) => text.Replace(',', '.');
         private void UpdateIDs()
@@ -96,18 +108,19 @@ namespace BookManager
         }
         private void SetAllInOrder()
         {
-            DataTable dt = DB.Select($"SELECT number, name, price FROM OrdersBooks join Books on Books.id = id_book WHERE id_order = {id_order} ");
-            List<OrderProduct> products = new List<OrderProduct>();
+            DataTable dt = DB.Select($"SELECT Books.id, number, name, price FROM OrdersBooks join Books on Books.id = id_book WHERE id_order = {id_order} ");
+            cart_items = new List<OrderProduct>();
             foreach (DataRow dr in dt.Rows)
             {
-                products.Add(new OrderProduct
+                cart_items.Add(new OrderProduct
                 {
                     ID = dr["number"].ToString(),
+                    BookId = dr["id"].ToString(),
                     Name = dr["name"].ToString(),
                     Price = dr["price"].ToString()
                 });
             }
-            Cart.ItemsSource = products;
+            Cart.ItemsSource = cart_items;
         }
         private void AllBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -126,6 +139,10 @@ namespace BookManager
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            foreach(OrderProduct product in cart_items)
+            {
+                DB.Command($"Update Books set amount=amount+1 where id = {product.BookId}");
+            }
             LoginWindow login = new LoginWindow();
             login.Show();
             Close();

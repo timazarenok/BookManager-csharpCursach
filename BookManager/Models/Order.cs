@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookManager.Models
 {
-    class Order
+    public class Order
     {
         public string ID { get; set; }
         public string Date { get; set; }

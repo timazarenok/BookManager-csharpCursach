@@ -73,5 +73,10 @@ namespace BookManager
             InfoWindow window = new InfoWindow();
             window.Show();
         }
+
+        private void Pereozenka_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
